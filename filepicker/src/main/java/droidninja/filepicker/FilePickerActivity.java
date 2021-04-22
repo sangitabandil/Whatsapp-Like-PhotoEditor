@@ -26,7 +26,7 @@ public class FilePickerActivity extends BaseFilePickerActivity
   private int type;
 
   @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState, int layout) {
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState, R.layout.activity_file_picker);
   }
 

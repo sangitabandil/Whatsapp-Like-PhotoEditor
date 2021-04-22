@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
   <com.droidninja.imageeditengine.views.CustomPaintView
       android:id="@+id/paint_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:visibility="visible"
-      />
+      android:visibility="visible" />
 
   <RelativeLayout
       android:id="@+id/container_view"
@@ -29,14 +25,13 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingTop="40dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/add_text_et"
