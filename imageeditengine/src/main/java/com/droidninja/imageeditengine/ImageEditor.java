@@ -1,11 +1,9 @@
 package com.droidninja.imageeditengine;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.util.SparseBooleanArray;
 import android.widget.Toast;
+
 import java.io.File;
 
 public class ImageEditor {
@@ -32,17 +30,18 @@ public class ImageEditor {
   public static class Builder{
 
     private final String imagePath;
-    private Activity context;
+    private final Activity context;
     private String stickerFolderName;
     private boolean enabledEditorText = true;
     private boolean enabledEditorPaint = true;
-    private boolean enabledEditorSticker = false;
+    private boolean enabledEditorSticker = true;
     private boolean enableEditorCrop = false;
     private boolean enableFilters = true;
 
     public Builder(Activity context, String imagePath) {
       this.context = context;
       this.imagePath = imagePath;
+      this.stickerFolderName = "stickers";
     }
 
     public Builder setStickerAssets(String folderName){

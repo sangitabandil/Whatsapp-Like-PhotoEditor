@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
                     if (photoPaths.size > 0) {
                         ImageEditor.Builder(this, photoPaths[0])
-                                .setStickerAssets("stickers")
                                 .open()
                     } else {
                         Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
