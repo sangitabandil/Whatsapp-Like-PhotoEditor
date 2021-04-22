@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+
 import droidninja.filepicker.models.FileType;
 import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.Orientation;
-import java.util.ArrayList;
 
 /**
  * Created by droidNinja on 29/07/16.

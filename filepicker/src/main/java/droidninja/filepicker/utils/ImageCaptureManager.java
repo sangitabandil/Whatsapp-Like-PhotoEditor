@@ -7,17 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.core.content.FileProvider;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import droidninja.filepicker.PickerManager;
 
@@ -26,8 +22,8 @@ public class ImageCaptureManager {
   private final static String CAPTURED_PHOTO_PATH_KEY = "mCurrentPhotoPath";
   public static final int REQUEST_TAKE_PHOTO = 0x101;
 
-  private String mCurrentPhotoPath;
-  private Context mContext;
+    private String mCurrentPhotoPath;
+    private final Context mContext;
 
   public ImageCaptureManager(Context mContext) {
     this.mContext = mContext;

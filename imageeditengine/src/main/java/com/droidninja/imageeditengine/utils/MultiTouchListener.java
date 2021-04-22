@@ -1,7 +1,6 @@
 package com.droidninja.imageeditengine.utils;
 
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -10,6 +9,9 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import com.droidninja.imageeditengine.views.ViewTouchListener;
 
 /**
@@ -20,29 +22,29 @@ public class MultiTouchListener implements OnTouchListener {
   private static final int INVALID_POINTER_ID = -1;
   private final GestureDetector mGestureListener;
   private final ViewTouchListener viewTouchListener;
-  private boolean isRotateEnabled = true;
-  private boolean isTranslateEnabled = true;
-  private boolean isScaleEnabled = true;
-  private float minimumScale = 0.5f;
-  private float maximumScale = 10.0f;
+  private final boolean isRotateEnabled = true;
+  private final boolean isTranslateEnabled = true;
+  private final boolean isScaleEnabled = true;
+  private final float minimumScale = 0.5f;
+  private final float maximumScale = 10.0f;
   private int mActivePointerId = INVALID_POINTER_ID;
   private float mPrevX, mPrevY, mPrevRawX, mPrevRawY;
-  private ScaleGestureDetector mScaleGestureDetector;
+  private final ScaleGestureDetector mScaleGestureDetector;
 
-  private int[] location = new int[2];
-  private Rect outRect;
-  private View deleteView;
-  private ImageView photoEditImageView;
-  private RelativeLayout parentView;
+  private final int[] location = new int[2];
+  private final Rect outRect;
+  private final View deleteView;
+  private final ImageView photoEditImageView;
+  private final RelativeLayout parentView;
 
   private OnMultiTouchListener onMultiTouchListener;
   private OnGestureControl mOnGestureControl;
-  private boolean mIsTextPinchZoomable;
+  private final boolean mIsTextPinchZoomable;
   private View currentView;
 
   public MultiTouchListener(@Nullable View deleteView, RelativeLayout parentView,
-      ImageView photoEditImageView, boolean isTextPinchZoomable,
-      ViewTouchListener viewTouchListener) {
+                            ImageView photoEditImageView, boolean isTextPinchZoomable,
+                            ViewTouchListener viewTouchListener) {
     mIsTextPinchZoomable = isTextPinchZoomable;
     this.viewTouchListener = viewTouchListener;
     mScaleGestureDetector = new ScaleGestureDetector(new ScaleGestureListener());
@@ -232,7 +234,7 @@ public class MultiTouchListener implements OnTouchListener {
 
     private float mPivotX;
     private float mPivotY;
-    private Vector2D mPrevSpanVector = new Vector2D();
+    private final Vector2D mPrevSpanVector = new Vector2D();
 
     @Override public boolean onScaleBegin(View view, ScaleGestureDetector detector) {
       mPivotX = detector.getFocusX();

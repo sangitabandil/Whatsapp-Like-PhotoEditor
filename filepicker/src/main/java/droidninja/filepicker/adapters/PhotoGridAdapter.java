@@ -1,13 +1,14 @@
 package droidninja.filepicker.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
@@ -184,11 +185,11 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
       View selectBg;
 
     public PhotoViewHolder(View itemView) {
-      super(itemView);
-      checkBox = (SmoothCheckBox) itemView.findViewById(R.id.checkbox);
-      imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
-      videoIcon = (ImageView) itemView.findViewById(R.id.video_icon);
-      selectBg = itemView.findViewById(R.id.transparent_bg);
+        super(itemView);
+        checkBox = itemView.findViewById(R.id.checkbox);
+        imageView = itemView.findViewById(R.id.iv_photo);
+        videoIcon = itemView.findViewById(R.id.video_icon);
+        selectBg = itemView.findViewById(R.id.transparent_bg);
     }
   }
 }

@@ -2,17 +2,25 @@ package droidninja.filepicker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import droidninja.filepicker.adapters.FileAdapterListener;
 import droidninja.filepicker.adapters.PhotoGridAdapter;
 import droidninja.filepicker.cursors.loadercallbacks.FileResultCallback;
@@ -20,10 +28,6 @@ import droidninja.filepicker.models.Media;
 import droidninja.filepicker.models.PhotoDirectory;
 import droidninja.filepicker.utils.AndroidLifecycleUtils;
 import droidninja.filepicker.utils.MediaStoreHelper;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class MediaDetailsActivity extends BaseFilePickerActivity implements FileAdapterListener {
 
@@ -37,6 +41,7 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
   private PhotoDirectory photoDirectory;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
     super.onCreate(savedInstanceState, R.layout.activity_media_details);
   }
 
@@ -153,8 +158,8 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
       photoGridAdapter.setData(medias);
       photoGridAdapter.notifyDataSetChanged();
     } else {
-      photoGridAdapter = new PhotoGridAdapter(this, mGlideRequestManager, (ArrayList<Media>) medias,
-          PickerManager.getInstance().getSelectedPhotos(), false, this);
+      photoGridAdapter = new PhotoGridAdapter(this, mGlideRequestManager, medias,
+              PickerManager.getInstance().getSelectedPhotos(), false, this);
       recyclerView.setAdapter(photoGridAdapter);
     }
 

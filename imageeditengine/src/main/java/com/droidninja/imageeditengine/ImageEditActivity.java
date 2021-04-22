@@ -3,11 +3,11 @@ package com.droidninja.imageeditengine;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.droidninja.imageeditengine.utils.FragmentUtil;
 
 import static com.droidninja.imageeditengine.ImageEditor.EXTRA_IMAGE_PATH;

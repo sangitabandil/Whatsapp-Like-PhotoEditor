@@ -3,8 +3,9 @@ package droidninja.filepicker.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 public class AndroidLifecycleUtils {
     public static boolean canLoadImage(Fragment fragment) {
@@ -38,10 +39,6 @@ public class AndroidLifecycleUtils {
         boolean destroyed = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
                 activity.isDestroyed();
 
-        if (destroyed || activity.isFinishing()) {
-            return false;
-        }
-
-        return true;
+        return !destroyed && !activity.isFinishing();
     }
 }

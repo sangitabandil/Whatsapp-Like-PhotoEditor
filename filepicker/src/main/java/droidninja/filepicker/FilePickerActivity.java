@@ -3,34 +3,39 @@ package droidninja.filepicker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+
+import java.util.ArrayList;
+
 import droidninja.filepicker.fragments.DocFragment;
 import droidninja.filepicker.fragments.DocPickerFragment;
 import droidninja.filepicker.fragments.MediaPickerFragment;
 import droidninja.filepicker.fragments.PhotoPickerFragmentListener;
 import droidninja.filepicker.utils.FragmentUtil;
-import java.util.ArrayList;
 
 public class FilePickerActivity extends BaseFilePickerActivity
-    implements PhotoPickerFragmentListener, DocFragment.DocFragmentListener,
-    DocPickerFragment.DocPickerFragmentListener, MediaPickerFragment.MediaPickerFragmentListener {
+        implements PhotoPickerFragmentListener, DocFragment.DocFragmentListener,
+        DocPickerFragment.DocPickerFragmentListener, MediaPickerFragment.MediaPickerFragmentListener {
 
   private static final String TAG = FilePickerActivity.class.getSimpleName();
   private int type;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState, int layout) {
     super.onCreate(savedInstanceState, R.layout.activity_file_picker);
   }
 
-  @Override protected void initView() {
+  @Override
+  protected void initView() {
     Intent intent = getIntent();
     if (intent != null) {
       ArrayList<String> selectedPaths =
-          intent.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
+              intent.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
       type = intent.getIntExtra(FilePickerConst.EXTRA_PICKER_TYPE, FilePickerConst.MEDIA_PICKER);
 
       if (selectedPaths != null) {
@@ -91,11 +96,7 @@ public class FilePickerActivity extends BaseFilePickerActivity
     getMenuInflater().inflate(R.menu.picker_menu, menu);
     MenuItem menuItem = menu.findItem(R.id.action_done);
     if(menuItem != null) {
-      if (PickerManager.getInstance().getMaxCount() == 1) {
-        menuItem.setVisible(false);
-      } else {
-        menuItem.setVisible(true);
-      }
+      menuItem.setVisible(PickerManager.getInstance().getMaxCount() != 1);
     }
     return super.onCreateOptionsMenu(menu);
   }

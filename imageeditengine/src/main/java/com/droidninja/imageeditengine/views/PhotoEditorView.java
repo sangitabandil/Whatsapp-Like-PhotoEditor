@@ -8,9 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.support.annotation.Dimension;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,10 +20,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Dimension;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.droidninja.imageeditengine.R;
 import com.droidninja.imageeditengine.utils.KeyboardHeightProvider;
 import com.droidninja.imageeditengine.utils.MultiTouchListener;
 import com.droidninja.imageeditengine.utils.Utility;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

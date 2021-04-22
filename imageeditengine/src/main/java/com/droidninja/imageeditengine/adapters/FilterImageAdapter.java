@@ -1,7 +1,6 @@
 package com.droidninja.imageeditengine.adapters;
 
 import android.animation.LayoutTransition;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,14 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.droidninja.imageeditengine.R;
 import com.droidninja.imageeditengine.model.ImageFilter;
 import com.droidninja.imageeditengine.utils.Utility;
+
 import java.util.ArrayList;
 import java.util.List;
 

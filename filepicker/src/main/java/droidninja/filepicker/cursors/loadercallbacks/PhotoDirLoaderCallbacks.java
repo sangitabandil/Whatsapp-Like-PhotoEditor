@@ -3,14 +3,17 @@ package droidninja.filepicker.cursors.loadercallbacks;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import droidninja.filepicker.PickerManager;
-import droidninja.filepicker.cursors.PhotoDirectoryLoader;
-import droidninja.filepicker.models.PhotoDirectory;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import droidninja.filepicker.PickerManager;
+import droidninja.filepicker.cursors.PhotoDirectoryLoader;
+import droidninja.filepicker.models.PhotoDirectory;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE;
@@ -21,19 +24,20 @@ import static android.provider.MediaStore.MediaColumns.DATE_ADDED;
 import static android.provider.MediaStore.MediaColumns.TITLE;
 
 public class PhotoDirLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
-  public final static int INDEX_ALL_PHOTOS = 0;
-  private WeakReference<Context> context;
-  private FileResultCallback<PhotoDirectory> resultCallback;
+    public final static int INDEX_ALL_PHOTOS = 0;
+    private final WeakReference<Context> context;
+    private final FileResultCallback<PhotoDirectory> resultCallback;
 
-  public PhotoDirLoaderCallbacks(Context context,
-      FileResultCallback<PhotoDirectory> resultCallback) {
-    this.context = new WeakReference<>(context);
-    this.resultCallback = resultCallback;
-  }
+    public PhotoDirLoaderCallbacks(Context context,
+                                   FileResultCallback<PhotoDirectory> resultCallback) {
+        this.context = new WeakReference<>(context);
+        this.resultCallback = resultCallback;
+    }
 
-  @Override public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    return new PhotoDirectoryLoader(context.get(), args);
-  }
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new PhotoDirectoryLoader(context.get(), args);
+    }
 
   @Override public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 

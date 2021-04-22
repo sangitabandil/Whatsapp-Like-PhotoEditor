@@ -2,10 +2,6 @@ package droidninja.filepicker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 import droidninja.filepicker.FilePickerConst;
 import droidninja.filepicker.PickerManager;
 import droidninja.filepicker.R;
@@ -20,7 +24,6 @@ import droidninja.filepicker.adapters.FileAdapterListener;
 import droidninja.filepicker.adapters.FileListAdapter;
 import droidninja.filepicker.models.Document;
 import droidninja.filepicker.models.FileType;
-import java.util.List;
 
 public class DocFragment extends BaseFragment implements FileAdapterListener {
 

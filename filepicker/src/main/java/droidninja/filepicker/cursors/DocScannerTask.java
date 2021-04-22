@@ -4,10 +4,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import com.android.internal.util.Predicate;
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import droidninja.filepicker.PickerManager;
 import droidninja.filepicker.cursors.loadercallbacks.FileMapResultCallback;
@@ -50,48 +52,66 @@ public class DocScannerTask extends AsyncTask<Void, Void, Map<FileType, List<Doc
     this.resultCallback = fileResultCallback;
   }
 
-  private HashMap<FileType, List<Document>> createDocumentType(ArrayList<Document> documents) {
-    HashMap<FileType, List<Document>> documentMap = new HashMap<>();
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private HashMap<FileType, List<Document>> createDocumentType(ArrayList<Document> documents) {
+        HashMap<FileType, List<Document>> documentMap = new HashMap<>();
 
-    for (final FileType fileType : fileTypes) {
-      Predicate<Document> docContainsTypeExtension = new Predicate<Document>() {
-        public boolean apply(Document document) {
-          return document.isThisType(fileType.extensions);
+        for (final FileType fileType : fileTypes) {
+            Predicate<Document> docContainsTypeExtension = new Predicate<Document>() {
+                @Override
+                public boolean test(Document document) {
+                    return document.isThisType(fileType.extensions);
+                }
+
+                @Override
+                public Predicate<Document> and(Predicate<? super Document> other) {
+                    return null;
+                }
+
+                @Override
+                public Predicate<Document> negate() {
+                    return null;
+                }
+
+                @Override
+                public Predicate<Document> or(Predicate<? super Document> other) {
+                    return null;
+                }
+            };
+            ArrayList<Document> documentListFilteredByType =
+                    (ArrayList<Document>) FilePickerUtils.filter(documents, docContainsTypeExtension);
+
+            if (comparator != null) Collections.sort(documentListFilteredByType, comparator);
+
+            documentMap.put(fileType, documentListFilteredByType);
         }
-      };
-      ArrayList<Document> documentListFilteredByType =
-          (ArrayList<Document>) FilePickerUtils.filter(documents, docContainsTypeExtension);
 
-      if (comparator != null) Collections.sort(documentListFilteredByType, comparator);
-
-      documentMap.put(fileType, documentListFilteredByType);
+        return documentMap;
     }
 
-    return documentMap;
-  }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override protected Map<FileType, List<Document>> doInBackground(Void... voids) {
+        ArrayList<Document> documents = new ArrayList<>();
 
-  @Override protected Map<FileType, List<Document>> doInBackground(Void... voids) {
-    ArrayList<Document> documents = new ArrayList<>();
+        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE
+                + "!="
+                + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+                + " AND "
+                + MediaStore.Files.FileColumns.MEDIA_TYPE
+                + "!="
+                + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 
-    String selection = MediaStore.Files.FileColumns.MEDIA_TYPE
-        + "!="
-        + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
-        + " AND "
-        + MediaStore.Files.FileColumns.MEDIA_TYPE
-        + "!="
-        + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+        Cursor cursor =
+                contentResolver.query(MediaStore.Files.getContentUri("external"), DOC_PROJECTION, selection,
+                        null, MediaStore.Files.FileColumns.DATE_ADDED + " DESC");
 
-    Cursor cursor =
-        contentResolver.query(MediaStore.Files.getContentUri("external"), DOC_PROJECTION, selection,
-            null, MediaStore.Files.FileColumns.DATE_ADDED + " DESC");
+        if (cursor != null) {
+            documents = getDocumentFromCursor(cursor);
+            cursor.close();
+        }
 
-    if (cursor != null) {
-      documents = getDocumentFromCursor(cursor);
-      cursor.close();
+        return createDocumentType(documents);
     }
-
-    return createDocumentType(documents);
-  }
 
   @Override protected void onPostExecute(Map<FileType, List<Document>> documents) {
     if (resultCallback != null) {

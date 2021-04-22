@@ -1,7 +1,6 @@
 package droidninja.filepicker.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
@@ -132,12 +133,12 @@ public class FolderGridAdapter extends SelectableAdapter<FolderGridAdapter.Photo
       View selectBg;
 
     public PhotoViewHolder(View itemView) {
-      super(itemView);
-      imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
-      folderTitle = (TextView) itemView.findViewById(R.id.folder_title);
-      folderCount = (TextView) itemView.findViewById(R.id.folder_count);
-      bottomOverlay = itemView.findViewById(R.id.bottomOverlay);
-      selectBg = itemView.findViewById(R.id.transparent_bg);
+        super(itemView);
+        imageView = itemView.findViewById(R.id.iv_photo);
+        folderTitle = itemView.findViewById(R.id.folder_title);
+        folderCount = itemView.findViewById(R.id.folder_count);
+        bottomOverlay = itemView.findViewById(R.id.bottomOverlay);
+        selectBg = itemView.findViewById(R.id.transparent_bg);
     }
   }
 }

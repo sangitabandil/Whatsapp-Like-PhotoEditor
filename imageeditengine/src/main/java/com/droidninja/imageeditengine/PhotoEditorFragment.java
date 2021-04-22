@@ -7,26 +7,25 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.droidninja.imageeditengine.adapters.FilterImageAdapter;
 import com.droidninja.imageeditengine.filter.ApplyFilterTask;
 import com.droidninja.imageeditengine.filter.GetFiltersTask;
-import com.droidninja.imageeditengine.filter.PhotoProcessing;
 import com.droidninja.imageeditengine.filter.ProcessingImage;
 import com.droidninja.imageeditengine.model.ImageFilter;
 import com.droidninja.imageeditengine.utils.FilterHelper;
@@ -38,6 +37,8 @@ import com.droidninja.imageeditengine.views.PhotoEditorView;
 import com.droidninja.imageeditengine.views.VerticalSlideColorPicker;
 import com.droidninja.imageeditengine.views.ViewTouchListener;
 import com.droidninja.imageeditengine.views.imagezoom.ImageViewTouch;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class PhotoEditorFragment extends BaseFragment

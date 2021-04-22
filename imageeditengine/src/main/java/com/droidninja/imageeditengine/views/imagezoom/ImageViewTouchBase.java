@@ -11,6 +11,9 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.droidninja.imageeditengine.views.imagezoom.easing.Cubic;
 import com.droidninja.imageeditengine.views.imagezoom.easing.Easing;
 import com.droidninja.imageeditengine.views.imagezoom.graphic.FastBitmapDrawable;
@@ -18,41 +21,19 @@ import com.droidninja.imageeditengine.views.imagezoom.utils.IDisposable;
 
 /**
  * Base View to manage image zoom/scrool/pinch operations
- * 
+ *
  * @author alessandro
- * 
  */
-public abstract class ImageViewTouchBase extends android.support.v7.widget.AppCompatImageView implements IDisposable {
+public abstract class ImageViewTouchBase extends AppCompatImageView implements IDisposable {
 
-	public interface OnDrawableChangeListener {
-
-		/**
-		 * Callback invoked when a new drawable has been assigned to the view
-		 * 
-		 * @param drawable
-		 */
-		void onDrawableChanged(Drawable drawable);
-	};
-
-	public interface OnLayoutChangeListener {
-		/**
-		 * Callback invoked when the layout bounds changed
-		 * 
-		 * @param changed
-		 * @param left
-		 * @param top
-		 * @param right
-		 * @param bottom
-		 */
-		void onLayoutChanged(boolean changed, int left, int top, int right, int bottom);
-	};
+	private final PointF mCenter = new PointF();
 
 	/**
 	 * Use this to change the
 	 * {@link ImageViewTouchBase#setDisplayType(DisplayType)} of this View
-	 * 
+	 *
 	 * @author alessandro
-	 * 
+	 *
 	 */
 	public enum DisplayType {
 		/** Image is not scaled by default */
@@ -61,7 +42,17 @@ public abstract class ImageViewTouchBase extends android.support.v7.widget.AppCo
 		FIT_TO_SCREEN,
 		/** Image will be scaled only if bigger than the bounds of this view */
 		FIT_IF_BIGGER
-	};
+	}
+
+	public interface OnDrawableChangeListener {
+
+		/**
+		 * Callback invoked when a new drawable has been assigned to the view
+		 *
+		 * @param drawable
+		 */
+		void onDrawableChanged(Drawable drawable);
+	}
 
 	public static final String LOG_TAG = "ImageViewTouchBase";
 	protected static final boolean LOG_ENABLED = false;
@@ -88,7 +79,19 @@ public abstract class ImageViewTouchBase extends android.support.v7.widget.AppCo
 
 	private int mThisWidth = -1;
 	private int mThisHeight = -1;
-	private PointF mCenter = new PointF();
+
+	public interface OnLayoutChangeListener {
+		/**
+		 * Callback invoked when the layout bounds changed
+		 *
+		 * @param changed
+		 * @param left
+		 * @param top
+		 * @param right
+		 * @param bottom
+		 */
+		void onLayoutChanged(boolean changed, int left, int top, int right, int bottom);
+	}
 
 	protected DisplayType mScaleType = DisplayType.NONE;
 	private boolean mScaleTypeChanged;

@@ -1,35 +1,36 @@
 package com.droidninja.imageeditengine.utils;
 
 import android.app.Activity;
-import android.support.design.widget.FloatingActionButton;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.droidninja.imageeditengine.views.PhotoEditorView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * @author Simon Lightfoot <simon@demondevelopers.com>
  */
 public class FilterTouchListener implements View.OnTouchListener {
-  private final ImageView mainImageView;
-  private final int screenHeight;
-  private final View filterLabel;
-  private final PhotoEditorView photoEditorView;
-  private final FloatingActionButton doneBtn;
-  private float viewHeight;
-  private View mView;
-  private float mMotionDownY;
+    private final ImageView mainImageView;
+    private final int screenHeight;
+    private final View filterLabel;
+    private final PhotoEditorView photoEditorView;
+    private final FloatingActionButton doneBtn;
+    private final float viewHeight;
+    private final View mView;
+    private float mMotionDownY;
 
-  public FilterTouchListener(View filterLayout, float filterLayoutHeight,
-      final ImageView mainImageView, final PhotoEditorView photoEditorView, View filterLabel,
-      FloatingActionButton doneBtn) {
-    mView = filterLayout;
-    this.filterLabel = filterLabel;
-    this.doneBtn = doneBtn;
-    this.mainImageView = mainImageView;
-    this.photoEditorView = photoEditorView;
+    public FilterTouchListener(View filterLayout, float filterLayoutHeight,
+                               final ImageView mainImageView, final PhotoEditorView photoEditorView, View filterLabel,
+                               FloatingActionButton doneBtn) {
+        mView = filterLayout;
+        this.filterLabel = filterLabel;
+        this.doneBtn = doneBtn;
+        this.mainImageView = mainImageView;
+        this.photoEditorView = photoEditorView;
     DisplayMetrics displayMetrics = new DisplayMetrics();
     ((Activity) mainImageView.getContext()).getWindowManager()
         .getDefaultDisplay()
@@ -47,17 +48,17 @@ public class FilterTouchListener implements View.OnTouchListener {
         break;
       case MotionEvent.ACTION_MOVE:
         yPost = e.getRawY() - mMotionDownY;
-        Log.i(FilterTouchListener.class.getSimpleName(), String.valueOf(1f - Math.abs(yPost) / 1000)
-            + "--"
-            + yPost
-            + " - "
-            + viewHeight
-            + " - "
-            + mView.getY()
-            + "s - "
-            + screenHeight
-            + " d="
-            + (screenHeight - mView.getY()));
+          Log.i(FilterTouchListener.class.getSimpleName(), (1f - Math.abs(yPost) / 1000)
+                  + "--"
+                  + yPost
+                  + " - "
+                  + viewHeight
+                  + " - "
+                  + mView.getY()
+                  + "s - "
+                  + screenHeight
+                  + " d="
+                  + (screenHeight - mView.getY()));
         if ((yPost >= 0 && yPost < viewHeight)) {
           mView.setTranslationY(yPost);
           filterLabel.setAlpha(Math.abs(yPost) / 1000);
